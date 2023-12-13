@@ -94,12 +94,12 @@ const NavBar = () => {
         <div className={navOpen ? "navMenu active" : "navMenu"} ref={menuRef}>
             {navBars.map((navBar, index) => {
                 return (
-                    <a className="navItem" key={index} onClick={() => itemClick(navBar.elementID)}>
+                    <div className="navItem" key={index} onClick={() => itemClick(navBar.elementID)}>
                         <a to="#">
                             {navBar.icon}
                             <span>{navBar.title}</span>
                         </a>
-                    </a>
+                    </div>
                 );
             })}
         </div>
