@@ -116,6 +116,11 @@ body {
     margin: 15px 30px;
     padding: 12px;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.pasDiv:hover {
+    transform: translateY(20px);
 }
 
 .pasText, .pasIcon {
