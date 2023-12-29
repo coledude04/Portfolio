@@ -1,26 +1,31 @@
 import { React, useState, useEffect, useRef } from 'react';
 import * as CGIcons from 'react-icons/cg';
+import ContactInfo from './ContactInfo';
 
 const navBars = [
     {
         title: "Home",
         elementID: "navigator",
-        icon: <CGIcons.CgHomeAlt />
+        icon: <CGIcons.CgHomeAlt />,
+        itemScroll: true
     },
     {
         title: "About Me",
         elementID: "aboutMeTitle",
-        icon: <CGIcons.CgBoy />
+        icon: <CGIcons.CgBoy />,
+        itemScroll: true
     },
     {
         title: "Projects",
         elementID: "projectsTitle",
-        icon: <CGIcons.CgFolder />
+        icon: <CGIcons.CgFolder />,
+        itemScroll: true
     },
     {
         title: "Contact",
         elementID: "1000",
-        icon: <CGIcons.CgUser />
+        icon: <CGIcons.CgUser />,
+        itemScroll: false
     }
 ]
 
@@ -30,6 +35,9 @@ const NavBar = () => {
     const menuRef = useRef();
     const [navOpen, setNavOpen] = useState(false);
     const [navVis, setNavVis] = useState(true);
+    const [infoOpen, setInfoOpen] = useState(false);
+
+    const hideInfo = () => setInfoOpen(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -54,14 +62,16 @@ const NavBar = () => {
         setNavVis(false);
     }
 
-    const itemClick = (clickedElement) => {
+    const itemClick = (clickedElement, scrollable) => {
         setNavOpen(false);
         const element = document.getElementById(clickedElement);
 
-        if (element){
+        if (element && scrollable){
             element.scrollIntoView({behavior: 'smooth'});
         }
-        
+        else if (!scrollable){
+            setInfoOpen(true)
+        }
     };
 
     useEffect(() => {
@@ -81,29 +91,30 @@ const NavBar = () => {
     }, [menuRef, menuBtnRef, setNavOpen]);
 
     return (
-        <>
+        <div>
         <div className={navVis ? "navBar active": "navBar"}>
             <a to="#" id="menuBtn" className={navOpen ? "active" : ""} ref={menuBtnRef}>
                 <CGIcons.CgChevronRight />
             </a>
             <h1 id="title">colespace</h1>
             <a to="#" id="actBtn">
-                <CGIcons.CgSmileMouthOpen />
+                <CGIcons.CgSmileMouthOpen onClick={() => setInfoOpen(true)}/>
             </a>
+            <div className={navOpen ? "navMenu active" : "navMenu"} ref={menuRef}>
+                {navBars.map((navBar, index) => {
+                    return (
+                        <div className="navItem" key={index} onClick={() => itemClick(navBar.elementID, navBar.itemScroll)}>
+                            <a to="#">
+                                {navBar.icon}
+                                <span>{navBar.title}</span>
+                            </a>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
-        <div className={navOpen ? "navMenu active" : "navMenu"} ref={menuRef}>
-            {navBars.map((navBar, index) => {
-                return (
-                    <div className="navItem" key={index} onClick={() => itemClick(navBar.elementID)}>
-                        <a to="#">
-                            {navBar.icon}
-                            <span>{navBar.title}</span>
-                        </a>
-                    </div>
-                );
-            })}
+        {infoOpen && <ContactInfo hideInfoFunc={hideInfo} />}
         </div>
-        </>
     );
 }
 export default NavBar;

@@ -1,22 +1,43 @@
 body {
     font-family: Verdana;
+    margin: 0;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #555555 transparent;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888888;
+    border-radius: 5px 0 0 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #cfc215;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 .navBar {
     display: flex;
     justify-content: center;
-    width: 100%;
     padding-bottom: 11px;
     position: fixed;
     top: -100%;
-    transition: 0.2s;
+    transition: 1s;
     background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 1));
-    z-index: 99;
+    z-index: 9;
+    width: 100%;
 }
 
 .navBar.active {
     top: 0;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
 #menuBtn, #actBtn {
@@ -47,12 +68,17 @@ body {
 
 #actBtn {
     right: 0;
-    margin: 8px 15px;
+    margin: 8px 8px;
 }
 
 #title {
     margin: 0;
     font-size: 40px;
+    transition: color 0.3s;
+}
+
+#title:hover {
+    color: #cfc215;
 }
 
 .homeSection {
@@ -60,6 +86,7 @@ body {
     display: flex;
     align-items: center;    
     justify-content: center;
+    width: 100%;
 }
 
 #navigator {
@@ -75,6 +102,7 @@ body {
 
 #introText span {
     font-size: 35px;
+    color: #cfc215;
 }
 
 @keyframes bounce {
@@ -150,7 +178,7 @@ body {
     font-size: 3rem;
     width: 100%;
     padding-top: 50px;
-    border-top: 1px solid black;
+    border-top: 2px solid #cfc215;
     padding-top: 175px;
 }
 
@@ -173,12 +201,12 @@ body {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in;
+    transition: box-shadow 0.25s;
     position: relative;
 }
 
 .projCard:hover {
-    transform: scale(1.05);
+    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.8);
 }
 
 .projPic {
@@ -220,7 +248,7 @@ body {
 }
 
 .projBtn:hover {
-    background-color: #292929;
+    background-color: #cfc215;
 }
 
 .navMenu {
@@ -231,7 +259,7 @@ body {
     width: 230px;
     left: -100%;
     transition: 0.25s;
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 10px 10px 0;
 }
 
 .navMenu.active {
@@ -251,10 +279,76 @@ body {
 }
 
 .navItem:hover {
-    background-color: #292929;
+    background-color: #cfc215;
 }
 
 .navItem span {
     margin-left: 40px;
     width: 95%;
+}
+
+.contactInfo {
+    display: flex;
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.contactCard {
+    position: fixed;
+    border: solid 2px #000;
+    background-color: #fff;
+    width: 400px;
+    height: 430px;
+}
+
+#infoTop {
+    text-align: center;
+}
+
+#contactClose {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#contactIcon {
+    font-size: 5rem;
+    color: #cfc215;
+    margin-top: 20px;
+}
+
+.contactTitle {
+    font-size: 1.8rem;
+    margin-bottom: 50px;
+}
+
+.linkedin {
+    color: #cfc215;
+    display: block;
+    font-size: 2.5rem;
+    margin-top: 50px;
+}
+
+#infoContent {
+    text-align: center;
+}
+
+#contactMail {
+    display: inline;
+    position: relative;
+    top: 8px;
+    font-size: 2.2rem;
+}
+
+.email {
+    display: inline;
+    margin-left: 25px;
+    font-size: 1.3rem;
 }
