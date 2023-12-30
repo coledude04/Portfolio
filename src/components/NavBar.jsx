@@ -42,10 +42,18 @@ const NavBar = () => {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollPos = window.scrollY || document.documentElement.scrollTop;
-
-            currentScrollPos > prevScrollPos ? handleScrollDown() : handleScrollUp();
-
-            prevScrollPos = currentScrollPos;
+            const scrollDiff = currentScrollPos - prevScrollPos
+            if (currentScrollPos === 0){
+                setNavVis(true);
+            }
+            else if (scrollDiff < -50){
+                setNavVis(true);
+                prevScrollPos = currentScrollPos;
+            }
+            else if (scrollDiff > 150){
+                setNavVis(false);     
+                prevScrollPos = currentScrollPos;
+            }
         }
 
         let prevScrollPos = window.scrollY || document.documentElement.scrollTop;
@@ -54,13 +62,6 @@ const NavBar = () => {
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    const handleScrollUp = () => {
-        setNavVis(true);
-    }
-    const handleScrollDown = () => {
-        setNavVis(false);
-    }
 
     const itemClick = (clickedElement, scrollable) => {
         setNavOpen(false);
@@ -92,7 +93,7 @@ const NavBar = () => {
 
     return (
         <div>
-        <div className={navVis ? "navBar active": "navBar"}>
+        <div className={`navBar ${navVis ? "": "hidden"}`}>
             <a to="#" id="menuBtn" className={navOpen ? "active" : ""} ref={menuBtnRef}>
                 <CGIcons.CgChevronRight />
             </a>
@@ -113,7 +114,7 @@ const NavBar = () => {
                 })}
             </div>
         </div>
-        {infoOpen && <ContactInfo hideInfoFunc={hideInfo} />}
+        <ContactInfo hideInfoFunc={hideInfo} nameOfClass={infoOpen}/>
         </div>
     );
 }

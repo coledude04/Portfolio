@@ -1,7 +1,15 @@
 import React from 'react';
+import { useEffect } from 'react';
 import * as CGIcons from 'react-icons/cg';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
+
+    useEffect(() => {
+        toast("This website is unfinished. Some content may not work.");
+    }, [])
+
     return(
         <>
         <p id="navigator">This is here so that the nav menu can direct the user to the top!</p>
@@ -13,6 +21,18 @@ const Home = () => {
                 <CGIcons.CgArrowLongDown />
             </a>
         </div>
+        <ToastContainer
+            position="bottom-right"
+            autoClose={10000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+        />
         </>
     )
 }

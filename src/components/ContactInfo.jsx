@@ -5,7 +5,7 @@ import { FaLinkedin } from "react-icons/fa";
 const ContactInfo = (props) => {
 
     return (
-        <div className="contactInfo">
+        <div className={props.nameOfClass ? "contactInfo": "contactInfo inactive"}>
             <div className="contactCard">
                 <div id="infoTop">
                     <CGIcons.CgUser id="contactIcon" />
