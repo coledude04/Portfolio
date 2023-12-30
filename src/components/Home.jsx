@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Home = () => {
 
     useEffect(() => {
-        toast("This website is unfinished. Some content may not work.");
+        toast("This website is unfinished. Some content may not function.");
     }, [])
 
     return(
