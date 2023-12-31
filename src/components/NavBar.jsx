@@ -38,15 +38,15 @@ const NavBar = () => {
     const [infoOpen, setInfoOpen] = useState(false);
 
     const hideInfo = () => setInfoOpen(false);
-
+    //Problem: prevScrollPos does not update so nav doesn't show everytime user scrolls up
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollPos = window.scrollY || document.documentElement.scrollTop;
-            const scrollDiff = currentScrollPos - prevScrollPos
+            const scrollDiff = currentScrollPos - prevScrollPos;
             if (currentScrollPos === 0){
                 setNavVis(true);
             }
-            else if (scrollDiff < -50){
+            else if (currentScrollPos - truePrevScrollPos < 0){
                 setNavVis(true);
                 prevScrollPos = currentScrollPos;
             }
@@ -54,7 +54,10 @@ const NavBar = () => {
                 setNavVis(false);     
                 prevScrollPos = currentScrollPos;
             }
+            truePrevScrollPos = currentScrollPos;
         }
+
+        let truePrevScrollPos = window.scrollY || document.documentElement.scrollTop;
 
         let prevScrollPos = window.scrollY || document.documentElement.scrollTop;
 
